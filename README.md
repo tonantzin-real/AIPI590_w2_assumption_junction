@@ -14,7 +14,7 @@ We compare three interpretable modeling approaches—linear regression, logistic
 
 | Model | Key Assumptions Checked | Evidence | Concern |
 |---|---|---|---|
-| Linear regression | Linearity, independence, homoscedasticity, normality, multicollinearity, influential outliers | Durbin-Watson statistic was approximately 1.9932, suggesting little evidence of autocorrelation; the residual plot showed no strong systematic pattern; Breusch-Pagan testing indicated heteroscedasticity (p < 0.001); Q-Q plot showed heavy tails and non-normal residuals; VIFs were moderate and Cook's distance suggested no extreme outliers | The model does not fully satisfy the usual linear regression assumptions. In particular, residual variance is not constant, and the residuals are not close to normal. This makes the model less reliable for formal statistical inference and not appropriate for actual churn classification |
+| Linear regression | Linearity, independence, homoscedasticity, normality, multicollinearity, influential outliers | Durbin-Watson statistic was approximately 1.9932, suggesting little evidence of autocorrelation; the residual plot showed no strong systematic pattern; fanning shape indicated heteroscedasticity (p < 0.001); Q-Q plot showed heavy tails and non-normal residuals; VIFs were moderate and Cook's distance suggested no extreme outliers | The model does not fully satisfy the usual linear regression assumptions. In particular, residual variance is not constant, and the residuals are not close to normal. This makes the model less reliable for formal statistical inference and not appropriate for actual churn classification |
 | Logistic regression | Pending team analysis | Pending final team results | Pending final team results |
 | GAM | Nonlinearity, model fit, smooth-term interpretation | The GAM achieved ROC-AUC = 0.8476 and accuracy = 0.8027, suggesting strong discriminative power for churn risk; smooth terms allow nonlinear relationships to be modeled while remaining interpretable | GAMs are more complex than linear coefficients and require careful tuning of smoothness parameters; results still need additional out-of-sample validation |
 
@@ -27,19 +27,18 @@ We compare three interpretable modeling approaches—linear regression, logistic
 | GAM | ROC-AUC = 0.8476; Accuracy = 0.8027 | Smooth functions capture nonlinear relationships while remaining more interpretable than a black-box model | More complex than a single coefficient table; interpretation is less direct than linear or logistic regression |
 
 ## Recommendation
-Recommended model: GAM
+Recommended model: 
 
 Why this model:
-The GAM provides the strongest balance between predictive performance and interpretability among the models currently summarized. It captures nonlinear relationships in the data while remaining more transparent than a black-box classifier. In the current analysis, the GAM achieved an ROC-AUC of 0.8476 and an accuracy of 0.8027, which suggests strong churn discrimination.
+
 
 What the company can responsibly conclude:
-The company can conclude that the GAM is a useful exploratory model for identifying customers at greater risk of churn, and that certain customer features show nonlinear relationships with churn likelihood. The model appears capable of ranking high-risk customers above lower-risk customers.
 
 What the company should not conclude yet:
-The company should not treat the model as proof of causation. A pattern such as higher monthly charges being associated with higher churn risk does not mean that monthly charges cause churn. The company should also avoid using the model in high-stakes decisions without additional validation, calibration checks, and consideration of fairness and business context.
+
 
 One next analysis we would run:
-We would run a cross-validated comparison of GAM and logistic regression, along with calibration analysis, to confirm which model generalizes best and whether the predicted probabilities are well aligned with actual churn outcomes.
+
 
 ## Conclusion
-This project highlights that model interpretability must be considered together with model assumptions and predictive performance. Linear regression is useful for understanding continuous outcomes, but it does not fit the churn classification problem as naturally as a classifier. The GAM appears to be the strongest current candidate for the churn task because it captures nonlinear patterns while still remaining interpretable.
+This project highlights that model interpretability must be considered together with model assumptions and predictive performance. Linear regression is useful for understanding continuous outcomes, but it does not fit the churn classification problem as naturally as a classifier. 
