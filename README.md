@@ -1,4 +1,4 @@
-# Team Name: Assumption Junction
+# FATalytics: Assumption Junction
 
 ## Contributors
 - Ammy Lin: Linear Regression
@@ -29,13 +29,15 @@ We compare three interpretable modeling approaches—linear regression, logistic
 ## Recommendation
 Recommended model: Logistic regression
 
-Why this model: Logistic regression performs almost as well as the GAM (Accuracy 0.803 vs. 0.8027, ROC-AUC 0.836 vs. 0.8476), but its coefficients are much easier to explain to someone outside the data science team. Turning a coefficient into an odds ratio lets us say something simple like "customers on month-to-month contracts have much higher odds of churning than customers on two-year contracts," which is exactly the kind of explanation a business team would want. Linear regression isn't a good fit here at all, since churn is a yes/no outcome and not something to predict as a continuous number.
+**Why this model:** Logistic regression performs almost as well as the GAM (Accuracy 0.803 vs. 0.8027, ROC-AUC 0.836 vs. 0.8476), but its coefficients are much easier to explain to someone outside the data science team. Turning a coefficient into an odds ratio lets us say something simple like "customers on month-to-month contracts have much higher odds of churning than customers on two-year contracts," which is exactly the kind of explanation a business team would want. Linear regression isn't a good fit here at all, since churn is a yes/no outcome and not something to predict as a continuous number.
 
-What the company can responsibly conclude: Contract type, tenure, and payment method are strongly and reliably linked to churn. Customers who have been with the company longer are much less likely to churn, and customers on month-to-month contracts or paying by electronic check are more likely to churn. These relationships had low p-values and reasonably tight confidence intervals, so the company can act on them, for example by encouraging month-to-month customers to move to longer contracts.
+Although the GAM achieved slightly better accuracy and ROC-AUC, we chose Logistic Regression because its variables and coefficients are more directly interpretable and explainable. Each coefficient can be converted into an odds ratio and connected to a specific business factor, making it easier to communicate why the model identifies a customer as being at higher risk of churn. This transparency was more valuable for our goal of producing actionable explanations than the GAM's modest performance improvement.
 
-What the company should not conclude yet: The company shouldn't read too much into the exact effect of MonthlyCharges or InternetService type on their own. These features were highly correlated with each other (shown in the VIF table), so their individual coefficients had very wide confidence intervals and even flipped direction in a way that didn't make intuitive sense. We only trust the general pattern (fiber-optic and higher-cost customers churn more), not the precise size of the effect.
+**What the company can responsibly conclude:** Contract type, tenure, and payment method are strongly and reliably linked to churn. Customers who have been with the company longer are much less likely to churn, and customers on month-to-month contracts or paying by electronic check are more likely to churn. These relationships had low p-values and reasonably tight confidence intervals, so the company can act on them, for example by encouraging month-to-month customers to move to longer contracts.
 
-One next analysis we would run: We would look more closely at MonthlyCharges specifically, since our empirical logit plot showed it doesn't have a straight-line relationship with churn like logistic regression assumes. Trying a GAM just for that one feature, or binning MonthlyCharges into groups, would probably give a more honest picture of how price relates to churn.
+**What the company should not conclude yet:** The company shouldn't read too much into the exact effect of MonthlyCharges or InternetService type on their own. These features were highly correlated with each other (shown in the VIF table), so their individual coefficients had very wide confidence intervals and even flipped direction in a way that didn't make intuitive sense. We only trust the general pattern (fiber-optic and higher-cost customers churn more), not the precise size of the effect.
+
+**One next analysis we would run:** We would look more closely at MonthlyCharges specifically, since our empirical logit plot showed it doesn't have a straight-line relationship with churn like logistic regression assumes. Trying a GAM just for that one feature, or binning MonthlyCharges into groups, would probably give a more honest picture of how price relates to churn.
 
 
 ## Conclusion
